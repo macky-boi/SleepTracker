@@ -53,6 +53,8 @@ class SleepTrackerViewModel(
         private fun initializeTonight() {
                 uiScope.launch {
                         tonight.value = getTonightFromDatabase()
+                        Log.i("SleepTrackerViewModel", "called initializeTonight() \n" +
+                                "tonight: ${tonight.value}")
                 }
         }
 
@@ -82,9 +84,13 @@ class SleepTrackerViewModel(
 
         fun onStopTracking() {
                 uiScope.launch {
+                        Log.i("SleepTrackerViewModel", "called onStopTracking() \n" +
+                                "tonight: ${tonight.value}")
                         val oldNight = tonight.value ?: return@launch
                         oldNight.endTimeMilli = System.currentTimeMillis()
                         update(oldNight)
+                        Log.i("SleepTrackerViewModel", "called update(oldNight) \n" +
+                                "tonight: ${tonight.value}")
                 }
         }
 
